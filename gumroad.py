@@ -41,7 +41,7 @@ def deploy_to_vercel(html_content: str, project_name: str, vercel_token: str):
         # Set the project directory
         project_dir = Path(temp_dir) / project_name
         os.makedirs(project_dir)
-
+        
         # Write the HTML content to the index.html file
         with open(project_dir / "index.html", "w") as f:
             f.write(html_content)
@@ -57,7 +57,7 @@ def deploy_to_vercel(html_content: str, project_name: str, vercel_token: str):
             json.dump(vercel_config, f)
 
         # Deploy to Vercel using the CLI
-        cmd = ["vercel", "--token", vercel_token, "-y", "--prod"]
+        cmd = ["vercel", "-t", vercel_token,"-d", "--prod"]
 
         result = subprocess.run(cmd, cwd=project_dir, capture_output=True, text=True)
 
